@@ -1,0 +1,54 @@
+---
+name: Go Build
+on:
+    workflow_dispatch:
+    push:
+    pull_request:
+env:
+    CLI_NAME: tfgenctl-cli
+jobs:
+    build-supported-platforms:
+        name: Go Build
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - goos: linux
+                      goarch: amd64
+                    - goos: linux
+                      goarch: arm64
+                    - goos: linux
+                      goarch: arm
+                    - goos: darwin
+                      goarch: amd64
+                    - goos: windows
+                      goarch: amd64
+        steps:
+            - uses: actions/checkout@v3
+            - name: Set up Go
+              uses: actions/setup-go@v4
+              with:
+                  go-version: ~1.21
+            - name: Build for ${{ matrix.goos }}/${{ matrix.goarch }}
+              working-directory: ${{ github.workspace }}/cli
+              run: |
+                  GOOS=${{ matrix.goos }} GOARCH=${{ matrix.goarch }} go build -o bin/${{ env.CLI_NAME }}
+    build-supported-go-version:
+        name: Go Build Versions
+        needs: build-supported-platforms
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: true
+            matrix:
+                go-versions: [~1.21]
+        steps:
+            - uses: actions/checkout@v3
+            - name: Set up Go
+              uses: actions/setup-go@v4
+              with:
+                  go-version: ${{ matrix.go-versions }}
+            - name: Build for ${{ matrix.go-versions }}
+              working-directory: ${{ github.workspace }}/cli
+              run: |
+                  go build -o bin/${{ env.CLI_NAME }}

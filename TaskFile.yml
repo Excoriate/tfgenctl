@@ -1,0 +1,55 @@
+---
+version: '3'
+
+dotenv: ['.env.{{.ENV}}.aws', '.env.{{.ENV}}.terraform', '.env.{{.ENV}}.oai', .env]
+vars:
+    mod:
+    fn:
+    PROJECT_NAME: komit
+
+includes:
+    precommit:
+        taskfile: ./taskfiles/taskfile.precommit.yml
+    golang:
+        taskfile: ./taskfiles/Taskfile.go.yml
+
+tasks:
+    default:
+        cmds:
+            - task: dx:default
+    pc-init:
+        desc: Initialize and install required hooks
+        cmds:
+            - task: precommit:hooks-init
+    pc-run:
+        desc: Run all the hooks described in the .pre-commit-config.yaml file
+        cmds:
+            - task: precommit:hooks-run
+    go-ci:
+        desc: Execute all the go CI tasks.
+        cmds:
+            - task: golang:go-tidy
+            - task: golang:go-fmt
+            - task: golang:go-vet
+            - task: golang:go-lint
+            - task: golang:go-test
+
+    cli:
+        desc: Run the CLI
+        cmds:
+            - go run main.go {{.CLI_ARGS}}
+
+    build:
+        desc: Build the CLI
+        cmds:
+            - |
+              if [ -f {{.PROJECT_NAME}} ]; then
+                  rm {{.PROJECT_NAME}}
+              fi
+            - go build -o {{.PROJECT_NAME}} main.go
+
+    clibin:
+        desc: Build the CLI
+        deps: [build]
+        cmds:
+            - ./{{.PROJECT_NAME}} {{.CLI_ARGS}}
