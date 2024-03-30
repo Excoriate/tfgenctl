@@ -1,6 +1,5 @@
 <h1 align="center">
-  <img alt="logo" src="docs/logo/logo-komit-1.png" width="224px"/><br/>
-  KOMIT
+  <img alt="logo" src="docs/logo/logo.png" width="500px"/><br/>
 </h1>
 <p align="center">Conventional commits generated through <b>AI</b> for lazy engineers <b> and not so Lazy as well</b>.<br/><br/>
 
@@ -10,7 +9,7 @@
 [![Go Tests](https://github.com/Excoriate/Komit/actions/workflows/go-ci-tests.yml/badge.svg)](https://github.com/Excoriate/Komit/actions/workflows/go-ci-tests.yml)
 
 ---
-**KOMIT** is a **CLI** tool that generates [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) for your projects. Configure your [OpenAI API Key](https://www.howtogeek.com/885918/how-to-get-an-openai-api-key/) and let the AI do the work for you.
+**TfGenCTL** is a CLI tool that allows you to generate Terraform code for different use cases. it's meant to facilitate the creation of common patterns, such as modules, examples and more.
 
 ---
 
@@ -19,7 +18,7 @@
 ### brew
 
 ```bash
-brew install excoriate/tap/komit
+brew install excoriate/tap/tfgenctl
 ```
 
 ---
@@ -31,9 +30,8 @@ brew install excoriate/tap/komit
 
 ## Roadmap 🗓️
 
-- [ ] Add support for [Ollama](https://ollama.ai/) models.
-- [ ] Generate conventional [Pull Request](https://www.conventionalcommits.org/en/v1.0.0/#summary) in GitHub.
-- [ ] Generate conventional [Merge Request](https://www.conventionalcommits.org/en/v1.0.0/#summary) in GitLab.
+- [ ] Add more tests.
+- [ ] Add support for Terratest tests generation.
 
 ---
 
