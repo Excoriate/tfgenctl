@@ -5,7 +5,8 @@ dotenv: ['.env.{{.ENV}}.aws', '.env.{{.ENV}}.terraform', '.env.{{.ENV}}.oai', .e
 vars:
     mod:
     fn:
-    PROJECT_NAME: komit
+    PROJECT_NAME: tfgenctl
+    dir: '{{default "cli" .mod}}'
 
 includes:
     precommit:
@@ -25,7 +26,7 @@ tasks:
         desc: Run all the hooks described in the .pre-commit-config.yaml file
         cmds:
             - task: precommit:hooks-run
-    go-ci:
+    go-ci-pkg:
         desc: Execute all the go CI tasks.
         cmds:
             - task: golang:go-tidy
@@ -33,11 +34,27 @@ tasks:
             - task: golang:go-vet
             - task: golang:go-lint
             - task: golang:go-test
+    go-ci-cli:
+      desc: Execute all the go CI tasks.
+      dir: cli
+      cmds:
+        - task: golang:go-tidy
+        - task: golang:go-fmt
+        - task: golang:go-vet
+        - task: golang:go-lint
+        - task: golang:go-test
+
+    go-ci:
+      desc: Execute all the go CI tasks.
+      cmds:
+        - task: go-ci-pkg
+        - task: go-ci-cli
+
 
     cli:
         desc: Run the CLI
         cmds:
-            - go run main.go {{.CLI_ARGS}}
+            - cd {{.dir}} && go run main.go {{.CLI_ARGS}}
 
     build:
         desc: Build the CLI
