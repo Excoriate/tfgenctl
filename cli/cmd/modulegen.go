@@ -40,7 +40,7 @@ func (c *ModuleCmd) Run(ctx *kong.Context) error {
 		return err
 	}
 
-	if err := g.GenerateModule(c.Name, paths); err != nil {
+	if err := g.GenerateModule("v1", paths); err != nil {
 		return err
 	}
 

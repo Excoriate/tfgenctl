@@ -62,10 +62,12 @@ func (c *Client) ResolvePaths(module, group string) (*TargetPaths, error) {
 		group = ConvertNameToCanonical(group)
 		targetModulePath = filepath.Join(repoRoot, "modules", group, module)
 		targetExamplePath = filepath.Join(repoRoot, "examples", group, module)
+		targetTestPath = filepath.Join(repoRoot, "tests", group, module)
 		c.Log.Info("the group is not empty, the module will be placed in the group %s", group)
 	} else {
 		targetModulePath = filepath.Join(repoRoot, "modules", module)
 		targetExamplePath = filepath.Join(repoRoot, "examples", module)
+		targetTestPath = filepath.Join(repoRoot, "tests", module)
 	}
 
 	c.Log.Info("the module will be placed in the targetModulePath %s", targetModulePath)
