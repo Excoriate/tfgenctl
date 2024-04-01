@@ -11,3 +11,11 @@ func ConvertNameToCanonical(name string) string {
 
 	return strings.ReplaceAll(name, "-", "_")
 }
+
+func CleanBeforeCopy(relPath string) string {
+	if strings.HasSuffix(relPath, ".tmpl") {
+		relPath = strings.TrimSuffix(relPath, ".tmpl")
+	}
+
+	return relPath
+}

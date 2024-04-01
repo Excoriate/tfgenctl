@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"github.com/Excoriate/tfgenctl/cli/internal/cliutils"
 	"github.com/Excoriate/tfgenctl/cli/internal/generate"
 	"github.com/alecthomas/kong"
 )
@@ -28,21 +29,22 @@ func (c *ModuleCmd) Run(ctx *kong.Context) error {
 	}
 
 	// Form the path or the destination directory for the module
-	modulePath, err := g.ResolveModuleDestPath(c.Name, c.Group)
+	paths, err := g.ResolvePaths(c.Name, c.Group)
 	if err != nil {
 		return err
 	}
 
 	repoRoot, _ := g.Config.GetRepoRoot()
 
-	if err := g.CreateModulesDirectoryIfNotExists(repoRoot); err != nil {
+	if err := g.CreateBaseDirsIfNotExist(repoRoot); err != nil {
 		return err
 	}
 
-	_, err = g.GenerateCanonical("v1", modulePath)
-	if err != nil {
+	if err := g.GenerateModule(c.Name, paths); err != nil {
 		return err
 	}
+
+	cliutils.PrintSuccess("Module generated!", paths.ModulePath)
 
 	return nil
 }
