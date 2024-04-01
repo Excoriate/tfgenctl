@@ -1,0 +1,50 @@
+---
+formatter: markdown table
+
+header-from: main.tf
+content: |-
+    # ☁️ Example module
+    ## Description
+    {{ .Header }}
+    This module is used to demonstrate the how easy is to create a new terraform module. Here you usually describe the module's capabilities:
+    * 🚀 Example capability or feature 1
+    * 🚀 Example capability or feature 2
+
+    ---
+    ## Example
+    Examples of this module's usage are available in the [examples](./examples) folder.
+
+    ```hcl
+    {{ include "../../examples/default/basic/main.tf" }}
+    ```
+
+    For module composition, It's recommended to take a look at the module's `outputs` to understand what's available:
+    ```hcl
+    {{ include "outputs.tf" }}
+    ```
+    ---
+
+    ## Module's documentation
+    (This documentation is auto-generated using [terraform-docs](https://terraform-docs.io))
+    {{ .Providers }}
+
+    {{ .Modules }}
+
+    {{ .Resources }}
+
+    {{ .Requirements }}
+
+    {{ .Inputs }}
+
+    {{ .Outputs }}
+
+output:
+    file: README.md
+    mode: inject
+    template: |-
+        <!-- BEGIN_TF_DOCS -->
+        {{ .Content }}
+        <!-- END_TF_DOCS -->
+settings:
+    anchor: true
+    color: true
