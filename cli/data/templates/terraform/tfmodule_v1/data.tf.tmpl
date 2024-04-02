@@ -1,0 +1,38 @@
+# 🚀 Terraform Module - Data Sources
+#
+# This file (`data.tf`) is intended for defining data sources within your Terraform module.
+# Data sources allow you to use information defined outside of Terraform, or defined by
+# another separate Terraform configuration.
+
+# 📖 Best Practices for Data Sources:
+# 1. Reusability: Use data sources to fetch information that can be reused across multiple
+#    resources or modules, enhancing modularity and DRY principles in your project.
+# 2. Dynamic Configuration: Leverage data sources for dynamic configurations where the values
+#    might change outside of Terraform's management, ensuring your configurations remain up-to-date.
+# 3. Security: Carefully manage sensitive information fetched through data sources, using outputs
+#    and locals wisely to avoid unintended exposure.
+# 4. Documentation: Document each data source and its purpose within your module for clarity and
+#    maintainability.
+
+# Example Usage of a Data Source:
+# The following is an example definition for a hypothetical data source. Replace it with actual
+# data sources as per your module's requirements.
+#
+# data "aws_vpc" "example" {
+#   id = var.vpc_id
+# }
+#
+# This data source fetches information about an AWS VPC by its ID, which could then be used
+# to configure related resources within the same module.
+
+# 💡 Tip: Use data sources to abstract complexity and dependencies away from your Terraform
+# configurations. They can greatly simplify how you manage dependencies on external resources
+# and configurations.
+
+# 📚 Additional Resources:
+# - Terraform Documentation on Data Sources: https://www.terraform.io/docs/language/data-sources/index.html
+# - Provider Documentation: Refer to your provider's documentation for specific data sources available.
+
+# As you expand your module, remember to periodically review your data sources to ensure
+# they align with your infrastructure's current state and requirements.
+# Happy Terraforming! 🌍🛠️

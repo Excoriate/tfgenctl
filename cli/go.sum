@@ -1,7 +1,7 @@
-github.com/Excoriate/tfgenctl v0.0.0-20240330102430-f8833c268902 h1:UYBKvBg9+UX16RUDpWfc3wnbfquzHiT7vztpxJP46rg=
-github.com/Excoriate/tfgenctl v0.0.0-20240330102430-f8833c268902/go.mod h1:Zd4QJYY9sRaEfGdCwFc1moIKxyp9dA4Lj9841KWttNM=
-github.com/Excoriate/tftest v0.0.9 h1:lOTWRtp/Unu53Ve7UPBtPHZQsDZvLhL2YgtDiL7CklQ=
-github.com/Excoriate/tftest v0.0.9/go.mod h1:tXGgSELvvOMonQlaWcSDNanhHfi4dVgr2vB3w+RYeC0=
+github.com/Excoriate/tfgenctl v0.0.0-20240401072203-c6ba2b1d02a5 h1:0U26VEE6RGiwLzqrKvochRJ2dYnqETSyECVZEC6Sdug=
+github.com/Excoriate/tfgenctl v0.0.0-20240401072203-c6ba2b1d02a5/go.mod h1:Zd4QJYY9sRaEfGdCwFc1moIKxyp9dA4Lj9841KWttNM=
+github.com/Excoriate/tftest v0.0.10 h1:nO2B2vGuQWJBVNGKhKnC7YMZz/ZdwWaI5tJsodCiKp4=
+github.com/Excoriate/tftest v0.0.10/go.mod h1:epOVAMuBeqnXHXzq2DBnVUQIrmvZAOZqsnZkqjXoNsM=
 github.com/alecthomas/assert/v2 v2.6.0 h1:o3WJwILtexrEUk3cUVal3oiQY2tfgr/FHWiz/v2n4FU=
 github.com/alecthomas/assert/v2 v2.6.0/go.mod h1:Bze95FyfUr7x34QZrjL+XP+0qgp/zg8yS+TtBj1WA3k=
 github.com/alecthomas/kong v0.9.0 h1:G5diXxc85KvoV2f0ZRVuMsi45IrBgx9zDNGNj165aPA=
@@ -16,8 +16,8 @@ github.com/hexops/gotextdiff v1.0.3 h1:gitA9+qJrrTCsiCl7+kh75nPqQt1cx4ZkudSTLoUq
 github.com/hexops/gotextdiff v1.0.3/go.mod h1:pSWU5MAI3yDq+fZBTazCSJysOMbxWL1BSow5/V2vxeg=
 github.com/lucasb-eyer/go-colorful v1.2.0 h1:1nnpGOrhyZZuNyfu1QjKiUICQ74+3FNCN69Aj6K7nkY=
 github.com/lucasb-eyer/go-colorful v1.2.0/go.mod h1:R4dSotOR9KMtayYi1e77YzuveK+i7ruzyGqttikkLy0=
-github.com/mattn/go-isatty v0.0.18 h1:DOKFKCQ7FNG2L1rbrmstDN4QVRdS89Nkh85u68Uwp98=
-github.com/mattn/go-isatty v0.0.18/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
+github.com/mattn/go-isatty v0.0.20 h1:xfD0iDuEKnDkl03q4limB+vH+GxLEtL/jb4xVJSWWEY=
+github.com/mattn/go-isatty v0.0.20/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
 github.com/mattn/go-runewidth v0.0.12/go.mod h1:RAqKPSqVFrSLVXbA8x7dzmKdmGzieGRCM46jaSJTDAk=
 github.com/mattn/go-runewidth v0.0.15 h1:UNAjwbU9l54TA3KzvqLGxwWjHmMgBUVhBiTjelZgg3U=
 github.com/mattn/go-runewidth v0.0.15/go.mod h1:Jdepj2loyihRzMpdS35Xk/zdY8IAYHsh153qUoGf23w=
@@ -30,5 +30,5 @@ github.com/rivo/uniseg v0.2.0/go.mod h1:J6wj4VEh+S6ZtnVlnTBMWIodfgj8LQOQFoIToxlJ
 github.com/rivo/uniseg v0.4.7 h1:WUdvkW8uEhrYfLC4ZzdpI2ztxP1I582+49Oc5Mq64VQ=
 github.com/rivo/uniseg v0.4.7/go.mod h1:FN3SvrM+Zdj16jyLfmOkMNblXMcoc8DfTHruCPUcx88=
 golang.org/x/sys v0.6.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
-golang.org/x/sys v0.13.0 h1:Af8nKPmuFypiUBjVoU9V20FiaFXOcuZI21p0ycVYYGE=
-golang.org/x/sys v0.13.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
+golang.org/x/sys v0.18.0 h1:DBdB3niSjOA/O0blCZBqDefyWNYveAYMNF1Wum0DYQ4=
+golang.org/x/sys v0.18.0/go.mod h1:/VUhepiaJMQUp4+oa/7Zr1D23ma6VTLIYjOOTFZPUcA=

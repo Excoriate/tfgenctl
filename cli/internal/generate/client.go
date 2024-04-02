@@ -35,7 +35,7 @@ func (o *Options) GetDestDir() (string, error) {
 }
 
 func (o *Options) GetTFTemplateDirV1() (string, error) {
-	templateDir, err := config.GetTemplateTerraformDir("v1")
+	templateDir, err := config.GetTerraformModuleTemplate("v1")
 	if err != nil {
 		return "", err
 	}

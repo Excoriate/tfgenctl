@@ -1,9 +1,44 @@
+# 🚀 Terraform Module Outputs
+#
+# This file (`outputs.tf`) defines the outputs of your Terraform module. Outputs serve as a way
+# to expose key information about the resources created by your module, which can be useful for
+# integration with other Terraform configurations, documentation, or just to provide users with
+# critical data post-deployment.
+
+# 📚 Best Practices for Outputs:
+# 1. Descriptive Names: Use meaningful and descriptive names for your outputs to ensure that
+#    users can easily understand the information being provided.
+# 2. Documentation: Each output should include a description that clearly explains what the
+#    output represents and any relevant details users need to know.
+# 3. Sensitivity: Mark outputs that contain sensitive information as `sensitive = true` to
+#    prevent accidental disclosure.
+# 4. Selective Output: Only expose information that is useful to users or other modules. Avoid
+#    unnecessary outputs to reduce clutter and potential confusion.
+
+# Output: Module Enablement Status
+# Description: Indicates whether the module is enabled and its resources are being managed.
 output "is_enabled" {
-  value       = var.is_enabled
-  description = "Whether the module is enabled or not."
+value       = var.is_enabled
+description = "Whether the module is enabled or not."
+# Consider marking as sensitive if this flag controls critical infrastructure changes.
+# sensitive = true
 }
 
+# Output: Module Tags
+# Description: Provides the set of tags applied to the resources within the module. Tags can
+# be used for categorization, cost tracking, and other organizational needs.
 output "tags_set" {
-  value       = var.tags
-  description = "The tags set for the module."
+value       = var.tags
+description = "The tags set for the module."
+# If tags include sensitive information, mark this output as sensitive.
+# sensitive = true
 }
+
+# 💡 Tip: Review and verify your outputs periodically to ensure they remain relevant and
+# accurate as your module evolves. This practice helps in maintaining the quality and
+# usefulness of the information provided by your module.
+
+# For more information on outputs in Terraform, visit:
+# https://www.terraform.io/docs/language/values/outputs.html
+
+# Happy Terraforming! 🌍🚀
