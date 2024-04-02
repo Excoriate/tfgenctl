@@ -1,5 +1,40 @@
+# 🚀 Terraform Module - Main Configuration File
+#
+# This file (`main.tf`) serves as the heart of your Terraform module, defining the core
+# resources and infrastructure components. As you develop your module, consider the following
+# best practices to ensure maintainability, scalability, and readability.
+
+# 🔍 General Best Practices:
+# 1. Modularize: Break down your infrastructure into reusable modules to promote code reuse
+#    and simplify maintenance.
+# 2. Naming Conventions: Use clear, consistent naming conventions for resources and variables
+#    to improve code readability and maintainability.
+# 3. Resource Grouping: Group related resources logically using comments or separate files to
+#    make your module easier to navigate.
+# 4. Version Pinning: Pin to specific versions of Terraform and providers to ensure consistency
+#    and prevent unexpected changes.
+# 5. Documentation: Document your module's purpose, inputs, outputs, and usage examples to help
+#    users understand and utilize your module effectively.
+
+# 📦 Resource Configuration:
+# Below is a placeholder resource configuration for a `random_string`. Replace it with your
+# infrastructure components, following the Terraform documentation for each resource type.
+
 resource "random_string" "random_text" {
-  for_each = local.is_enabled
-  length   = 10
-  special  = false
+# 'for_each' allows dynamic creation based on input variables. Modify 'local.is_enabled' as per your logic.
+for_each = local.is_enabled
+
+# 'length' determines the size of the string. Adjust it based on your security or usage requirements.
+length = 10
+
+# Set 'special' to false to exclude special characters. Change it according to your needs.
+special = false
 }
+
+# 📚 Additional Resources:
+# - Terraform Documentation: https://www.terraform.io/docs
+# - Terraform Style Guide: https://www.terraform-best-practices.com/
+# - Terraform Modules Registry: https://registry.terraform.io/
+
+# Remember to review and test your Terraform configuration thoroughly before deployment.
+# Happy Terraforming! 🌍🚀

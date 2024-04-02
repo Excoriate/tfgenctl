@@ -3,6 +3,7 @@ package generate
 import (
 	"fmt"
 	"github.com/Excoriate/tfgenctl/cli/internal/config"
+	"github.com/Excoriate/tftest/pkg/tmplutils"
 	"github.com/Excoriate/tftest/pkg/utils"
 	"os"
 	"path/filepath"
@@ -10,25 +11,27 @@ import (
 )
 
 type ModuleGenerator interface {
-	// GenerateCanonical generates a canonical module from the template directory.
+	// GenerateModule GenerateCanonical generates a canonical module from the template directory.
 	// 'templatedir' is the targetModulePath to the template directory.
 	// 'destpath' is the targetModulePath to the destination directory.
 	GenerateModule(templatedir string, paths *TargetPaths) error
+	GenerateModuleExample(templatedir string, paths *TargetPaths) error
 	// Validate validates the module generation.
 	// 'module' is the name of the module.
 	// 'group' is the group name of the module. If the group is passed, normally it refers
 	// to the 'service' (cloud provider) the module is for. E.g.: /modules/s3/s3_bucket
 	Validate(module, group string, options *GenOptions) error
-	// ResolveModuleDestPath resolves the destination targetModulePath for the module.
+	// ResolvePaths ResolveModuleDestPath resolves the destination targetModulePath for the module.
 	// 'module' is the name of the module.
 	// 'group' is the group name of the module. If the group is passed, normally it refers
 	// to the 'service' (cloud provider) the module is for. E.g.: /modules/s3/s3_bucket
 	ResolvePaths(module, group string) (*TargetPaths, error)
-	// CreateModulesDirectoryIfNotExists creates the modules directory if it does not exist.
+	// CreateBaseDirsIfNotExist CreateModulesDirectoryIfNotExists creates the modules directory if it does not exist.
 	// 'repoRoot' is the root directory of the repository.
 	CreateBaseDirsIfNotExist(repoRoot string) error
 	CreateTargetPath(targetPath string) error
 	GenerateTerraformFiles(sourcePath string, destPath string) error
+	GenerateFile(sourcePath string, destPath string, funcMap template.FuncMap, data interface{}) error
 }
 
 type GenOptions struct {
@@ -169,7 +172,7 @@ func (c *Client) createAllTargetPaths(paths *TargetPaths) error {
 
 // GenerateModule generates a canonical module from the template directory.
 func (c *Client) GenerateModule(templateVersion string, paths *TargetPaths) error {
-	templateSourcePath, err := config.GetTemplateTerraformDir(templateVersion)
+	templateSourcePath, err := config.GetTerraformModuleTemplate(templateVersion)
 	if err != nil {
 		return err
 	}
@@ -191,58 +194,62 @@ func (c *Client) GenerateModule(templateVersion string, paths *TargetPaths) erro
 	return nil
 }
 
-func (c *Client) GenerateTerraformFiles(sourcePath string, targetPath string) error {
-	// Define a custom function map
-	funcMap := template.FuncMap{
-		// This is for ignoring some of the
-		"include": func(string) string { return "" },
+// GenerateModuleExample generates an example module from the template directory.
+func (c *Client) GenerateModuleExample(templateVersion string, paths *TargetPaths) error {
+	templateSourcePath, err := config.GetTerraformModuleExampleTemplate(templateVersion)
+	if err != nil {
+		return err
 	}
 
-	err := filepath.Walk(sourcePath, func(path string, info os.FileInfo, err error) error {
+	if paths == nil {
+		return fmt.Errorf("failed to generate example module, target paths are nil")
+	}
+
+	// Generate the target paths.
+	if err := c.createAllTargetPaths(paths); err != nil {
+		return err
+	}
+
+	// Generate the terraform files
+	if err := c.GenerateTerraformFiles(templateSourcePath, paths.ExamplePath); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// GenerateTerraformFiles generates files from templates, allowing individual file treatment.
+func (c *Client) GenerateTerraformFiles(sourcePath, targetPath string) error {
+	funcMap := template.FuncMap{
+		"include": func(string) string { return "" }, // No-op for the example
+	}
+
+	return filepath.Walk(sourcePath, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
-
 		if !info.IsDir() {
 			relPath, err := filepath.Rel(sourcePath, path)
 			if err != nil {
 				return err
 			}
 
-			// Remove the .tmpl extension
+			// Modify the file name if needed (e.g., remove .tmpl extension)
 			relPath = CleanBeforeCopy(relPath)
 
 			destPath := filepath.Join(targetPath, relPath)
 
-			// Read template content
-			content, err := os.ReadFile(path)
-			if err != nil {
-				return fmt.Errorf("failed to read template file: %w", err)
-			}
-
-			// Create a new template with the custom function map
-			tmpl, err := template.New("template").Funcs(funcMap).Parse(string(content))
-			if err != nil {
-				return fmt.Errorf("failed to parse template with custom function map: %w", err)
-			}
-
-			// Write to destination with processed content
-			file, err := os.Create(destPath)
-			if err != nil {
-				return fmt.Errorf("failed to create destination file: %w", err)
-			}
-			defer file.Close()
-
-			if err := tmpl.Execute(file, nil); err != nil {
-				return fmt.Errorf("failed to execute template: %w", err)
+			// Process the template file
+			if err := c.GenerateFile(path, destPath, funcMap, nil); err != nil {
+				return err
 			}
 		}
 		return nil
 	})
+}
 
-	if err != nil {
-		return fmt.Errorf("failed to generate terraform files: %w", err)
-	}
-
-	return nil
+// GenerateFile generates a file from a template.
+// It's a wrapper around the ProcessTemplFile function that's used from the TFTest library.
+func (c *Client) GenerateFile(sourcePath, destPath string, funcMap template.FuncMap, data interface{}) error {
+	return tmplutils.ProcessTemplFile(sourcePath, destPath, funcMap, data)
 }

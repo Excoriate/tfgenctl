@@ -1,13 +1,43 @@
+# 🚀 Terraform Module - Variable Definitions
+#
+# This file (`variables.tf`) is dedicated to defining the variables used by your Terraform module.
+# Variables serve as parameters for a Terraform module, allowing users to input values that can
+# change the module's behavior without altering the module's own source code.
+
+# 📖 Best Practices for Defining Variables:
+# 1. Clear Descriptions: Provide a clear, detailed description for each variable. This helps users
+#    understand the purpose of the variable and how it affects the module's resources.
+# 2. Sensible Defaults: Where appropriate, define sensible default values for variables. Defaults can
+#    simplify module usage for common scenarios, making the module more accessible to beginners.
+# 3. Type Constraints: Specify the type of each variable. This improves usability by catching
+#    incorrect inputs early and clarifying the expected data type for users.
+# 4. Use of EOF for Descriptions: For longer descriptions, use the "heredoc" syntax
+#    to maintain readability, especially in scenarios where resources are conditionally included in larger, composite modules.
+
 variable "is_enabled" {
-  type        = bool
-  description = <<EOF
-  Whether this module will be created or not. It is useful, for stack-composite
-modules that conditionally includes resources provided by this module..
+type        = bool
+description = <<-EOF
+Whether this module will be created or not. It is useful for stack-composite
+modules that conditionally include resources provided by this module.
 EOF
 }
 
+# Variable: Resource Tags
+# Description: A map of tags that will be applied to all resources created by this module.
+# Tags are key-value pairs that can help you organize and categorize resources, especially
+# for cost tracking, environment distinction (prod, dev, test), or ownership attribution.
 variable "tags" {
-  type        = map(string)
-  description = "A map of tags to add to all resources."
-  default     = {}
+type        = map(string)
+description = "A map of tags to add to all resources created by this module."
+default     = {}
 }
+
+# 💡 Tip: Consistently review and update your variables to ensure they remain relevant and
+# comprehensive. This practice helps in keeping your module flexible and user-friendly.
+
+# 📚 Additional Resources:
+# - Terraform Documentation on Variables: https://www.terraform.io/docs/language/values/variables.html
+# - Writing Custom Modules Guide: https://learn.hashicorp.com/collections/terraform/modules
+
+# Crafting well-documented and clearly defined variables is key to building a user-friendly
+# Terraform module. Happy Terraforming! 🌍🛠️

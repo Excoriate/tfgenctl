@@ -1,3 +1,43 @@
+# 🚀 Terraform Module - Version Constraints
+#
+# This file (`versions.tf`) specifies the Terraform version and provider versions required by
+# this module. Defining these constraints is essential for ensuring that your module works
+# reliably across different setups and Terraform versions.
+
+# 📖 Best Practices for Version Constraints:
+# 1. Specificity: Be as specific as necessary with version constraints to prevent compatibility
+#    issues. Avoid being overly restrictive to maintain flexibility for module users.
+# 2. Terraform Version: Always specify a minimum Terraform version to ensure users have the
+#    features and fixes your module relies on.
+# 3. Provider Version: Pinning specific provider versions or version ranges helps prevent
+#    unexpected changes that might come with provider updates.
+# 4. Continuous Review: Periodically review and update your version constraints to accommodate
+#    new features, bug fixes, and improvements in Terraform and providers.
+
+# Terraform Version Requirement
+# Specifies the minimum Terraform version required to use this module. This ensures that the
+# module benefits from recent Terraform features and bug fixes. Adjust the version as needed
+# based on your module's specific requirements.
+terraform {
+required_version = ">= 1.7.0"
+
+# Provider Requirements
+# Defines the required providers and their versions. Pinning provider versions enhances the
+# stability and predictability of your module by locking in specific functionality and
+# behavior expected by your module's resources.
+
+# 💡 Tip: Use the `~>` operator for version constraints to accept only backward-compatible
+# updates. For example, `version = "~> 3.4"` would accept version 3.4.3 but not 3.5.0.
+
+# 📚 Additional Resources:
+# - Terraform Documentation on Version Constraints: https://www.terraform.io/docs/language/expressions/version-constraints.html
+# - Managing Terraform Versions: https://www.terraform.io/docs/cli/commands/version.html
+# - Provider Versions: https://www.terraform.io/docs/language/providers/requirements.html
+
+# Keeping your version constraints up-to-date is key to leveraging the latest features while
+# maintaining the stability of your Terraform configurations.
+# Happy Terraforming! 🌍🛠️
+
 terraform {
   required_version = ">= 1.7.0"
   required_providers {

@@ -3,8 +3,8 @@ module github.com/Excoriate/tfgenctl/cli
 go 1.22.1
 
 require (
-	github.com/Excoriate/tfgenctl v0.0.0-20240330102430-f8833c268902
-	github.com/Excoriate/tftest v0.0.9
+	github.com/Excoriate/tfgenctl v0.0.0-20240401072203-c6ba2b1d02a5
+	github.com/Excoriate/tftest v0.0.10
 	github.com/alecthomas/kong v0.9.0
 	github.com/charmbracelet/lipgloss v0.10.0
 )

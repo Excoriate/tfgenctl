@@ -1,3 +1,32 @@
+# 🚀 Terraform Module - Local Values
+#
+# This file (`locals.tf`) is dedicated to defining local values within your Terraform module.
+# Locals act as a simplification layer, allowing you to assign names to commonly used expressions
+# or to compose more complex configurations in a readable manner.
+
+# 📖 Best Practices for Using Locals:
+# 1. Clarity: Use locals to improve the clarity of your Terraform code, making it easier to
+#    understand and maintain.
+# 2. Reusability: Define values that are reused throughout your module as locals to DRY
+#    (Don't Repeat Yourself) your code and simplify updates.
+# 3. Simplification: Use locals to simplify complex expressions, making your configurations
+#    more readable and easier to debug.
+# 4. Organization: Group related local values together for better organization and readability.
+
+# Example Local Value: Module Enablement Flag
+# Description: This local value acts as a simple flag to enable or disable the module's resources.
+# It's derived from the `is_enabled` variable and can be used throughout the module to conditionally
+# create resources.
 locals {
-  is_enabled = var.is_enabled
+is_enabled = var.is_enabled
 }
+
+# 💡 Tip: Treat `locals` as a means to not only simplify and clarify your configurations but also
+# as a mechanism to implement conditional logic and resource configurations in a clean and
+# organized manner.
+
+# For more insights on locals and their usage in Terraform, refer to:
+# https://www.terraform.io/docs/language/values/locals.html
+
+# Remember, well-organized and clearly documented Terraform code greatly enhances
+# maintainability and collaboration within your team. Happy Terraforming! 🌍✨
